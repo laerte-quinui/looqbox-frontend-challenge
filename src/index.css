@@ -2,13 +2,21 @@
 
 :root {
   font-family: 'League Spartan', system-ui, Arial, sans-serif;
-  line-height: auto;
   font-weight: 400;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Color pallet */
+  --vvd-green-cyan: '#00D084';
+  --vvd-orange: '#FF6900';
+  --eerie-black: '#172121';
+  --white: '#FFFFFF';
+
+  --neutral-300: '#B1B9B9';
+  --neutral-600: '#444B4B';
 }
 
 body {
@@ -16,4 +24,5 @@ body {
   padding: 0;
   min-width: 100vw;
   min-height: 100vh;
+  background-color: var(--white);
 }
