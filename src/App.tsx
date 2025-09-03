@@ -1,4 +1,5 @@
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, Layout } from 'antd'
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
         }
       }}
     >
-      <h1>Hello world</h1>
+      <Layout>
+        <Home />
+      </Layout>
     </ConfigProvider>
   )
 }
