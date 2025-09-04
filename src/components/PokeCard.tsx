@@ -2,14 +2,15 @@ import { Card, Flex, Typography } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import { useState } from 'react'
 import '../styles/pokecard.css'
-import TypeTag, { type PokemonType } from './TypeTag'
+import type { PokemonTypes } from '../types/pokemonTypes'
+import TypeTag from './TypeTag'
 
 interface Props {
   id: string
   name: string
   img: string
   animatedImg: string
-  types: PokemonType[]
+  types: PokemonTypes[]
 }
 
 const PokeCard = ({ id, name, img, animatedImg, types }: Props) => {

@@ -1,7 +1,8 @@
 import { Tag } from 'antd'
+import type { PokemonTypes } from '../types/pokemonTypes'
 
 interface TypeTagProps {
-  type: PokemonType
+  type: PokemonTypes
 }
 
 const TypeTag = ({ type }: TypeTagProps) => {
@@ -12,27 +13,7 @@ const TypeTag = ({ type }: TypeTagProps) => {
   )
 }
 
-export type PokemonType =
-  | 'fire'
-  | 'water'
-  | 'ice'
-  | 'grass'
-  | 'bug'
-  | 'rock'
-  | 'ground'
-  | 'steel'
-  | 'electric'
-  | 'ghost'
-  | 'dark'
-  | 'poison'
-  | 'psychic'
-  | 'fairy'
-  | 'dragon'
-  | 'flying'
-  | 'fighting'
-  | 'normal'
-
-const typeColors: Record<PokemonType, string> = {
+const typeColors: Record<PokemonTypes, string> = {
   fire: 'red',
   water: 'blue',
   ice: 'cyan',

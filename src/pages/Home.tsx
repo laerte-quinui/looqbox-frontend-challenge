@@ -5,25 +5,7 @@ import { useEffect, useState } from 'react'
 import { getAllPokemon } from '../api/getPokemon'
 import Logo from '../assets/Logo'
 import PokeCard from '../components/PokeCard'
-import type { PokemonType } from '../components/TypeTag'
-
-type PokemonProps = {
-  id: number
-  name: string
-  sprites: {
-    versions: {
-      'generation-v': {
-        'black-white': {
-          front_default: string
-          animated: {
-            front_default: string
-          }
-        }
-      }
-    }
-  }
-  types: { type: { name: string } }[]
-}
+import type { PokemonProps, PokemonTypes } from '../types/pokemonTypes'
 
 const Home = () => {
   const [allPokemon, setAllPokemon] = useState<PokemonProps[]>([])
@@ -71,7 +53,9 @@ const Home = () => {
                 pokemon.sprites.versions['generation-v']['black-white']
                   .front_default
               }
-              types={pokemon.types.map(type => type.type.name) as PokemonType[]}
+              types={
+                pokemon.types.map(type => type.type.name) as PokemonTypes[]
+              }
             />
           </Col>
         ))}
