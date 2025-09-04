@@ -17,23 +17,33 @@ const PokeGrid = () => {
 
   return (
     <Row justify="center" gutter={[16, 16]} style={{ marginTop: 24 }}>
-      {allPokemon.map(pokemon => (
-        <Col xs={24} sm={12} md={8} lg={4} key={pokemon.name}>
-          <PokeCard
-            id={String(pokemon.id)}
-            name={pokemon.name}
-            animatedImg={
-              pokemon.sprites.versions['generation-v']['black-white'].animated
-                .front_default
-            }
-            img={
-              pokemon.sprites.versions['generation-v']['black-white']
-                .front_default
-            }
-            types={pokemon.types.map(type => type.type.name) as PokemonTypes[]}
-          />
-        </Col>
-      ))}
+      {allPokemon.map(pokemon => {
+        const blackWhiteVer =
+          pokemon.sprites.versions['generation-v']['black-white']
+        const hasBlackWhite = blackWhiteVer.front_default !== null
+
+        return (
+          <Col xs={24} sm={12} md={8} lg={4} key={pokemon.name}>
+            <PokeCard
+              id={String(pokemon.id)}
+              name={pokemon.name}
+              animatedImg={
+                hasBlackWhite
+                  ? blackWhiteVer.animated.front_default
+                  : pokemon.sprites.front_default
+              }
+              img={
+                hasBlackWhite
+                  ? blackWhiteVer.front_default
+                  : pokemon.sprites.front_default
+              }
+              types={
+                pokemon.types.map(type => type.type.name) as PokemonTypes[]
+              }
+            />
+          </Col>
+        )
+      })}
     </Row>
   )
 }

@@ -2,6 +2,7 @@ export type PokemonProps = {
   id: number
   name: string
   sprites: {
+    front_default: string
     versions: {
       'generation-v': {
         'black-white': {

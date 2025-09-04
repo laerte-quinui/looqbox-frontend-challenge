@@ -23,7 +23,12 @@ const PokeCard = ({ id, name, img, animatedImg, types }: Props) => {
       onMouseOver={() => setHovering(true)}
       onMouseOut={() => setHovering(false)}
       cover={
-        <PokeImage img={img} animatedImg={animatedImg} animate={isHovering} />
+        <PokeImage
+          img={img}
+          name={name}
+          animatedImg={animatedImg}
+          isHovering={isHovering}
+        />
       }
     >
       <Meta
@@ -45,26 +50,27 @@ const PokeCard = ({ id, name, img, animatedImg, types }: Props) => {
 }
 
 interface PokeImageProps {
-  animate: boolean
+  isHovering: boolean
+  name: Props['name']
   img: Props['img']
   animatedImg: Props['animatedImg']
 }
 
-const PokeImage = ({ animate, img, animatedImg }: PokeImageProps) => {
+const PokeImage = ({ name, img, animatedImg, isHovering }: PokeImageProps) => {
   return (
     <div className="pokecard__image--container">
-      {!animate && (
+      {!isHovering && (
         <img
           src={img}
-          alt="pokemon image"
+          alt={`${name} image`}
           className="pokecard__image--static"
         />
       )}
 
-      {animate && (
+      {isHovering && (
         <img
           src={animatedImg}
-          alt="pokemon image"
+          alt={`${name} image`}
           className="pokecard__image--animated"
         />
       )}
