@@ -5,6 +5,7 @@ import PokeCard from './PokeCard'
 
 const PokeGrid = () => {
   const allPokemonQueries = useGetAllPokemon()
+  const isLoading = allPokemonQueries.some(query => query.isLoading)
   const pokemonList = allPokemonQueries
     .map(query => query.data)
     .filter(pokemon => pokemon !== undefined)
@@ -34,6 +35,7 @@ const PokeGrid = () => {
               types={
                 pokemon.types.map(type => type.type.name) as PokemonTypes[]
               }
+              isLoading={isLoading}
             />
           </Col>
         )

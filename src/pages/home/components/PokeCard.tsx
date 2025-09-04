@@ -1,4 +1,5 @@
-import { Card, Flex, Typography } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
+import { Card, Flex, Image, Spin, Typography } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import { useState } from 'react'
 import TypeTag from '../../../components/TypeTag'
@@ -11,14 +12,16 @@ interface Props {
   img: string
   animatedImg: string
   types: PokemonTypes[]
+  isLoading: boolean
 }
 
-const PokeCard = ({ id, name, img, animatedImg, types }: Props) => {
+const PokeCard = ({ id, name, img, animatedImg, types, isLoading }: Props) => {
   const [isHovering, setHovering] = useState(false)
 
   return (
     <Card
       hoverable
+      loading={isLoading}
       className="pokecard"
       onMouseOver={() => setHovering(true)}
       onMouseOut={() => setHovering(false)}
@@ -59,21 +62,19 @@ interface PokeImageProps {
 const PokeImage = ({ name, img, animatedImg, isHovering }: PokeImageProps) => {
   return (
     <div className="pokecard__image--container">
-      {!isHovering && (
-        <img
-          src={img}
-          alt={`${name} image`}
-          className="pokecard__image--static"
-        />
-      )}
-
-      {isHovering && (
-        <img
-          src={animatedImg}
-          alt={`${name} image`}
-          className="pokecard__image--animated"
-        />
-      )}
+      <Image
+        src={isHovering ? animatedImg : img}
+        alt={`${name} image`}
+        preview={false}
+        placeholder={
+          <Flex justify="center" align="center" style={{ height: '100%' }}>
+            <Spin indicator={<LoadingOutlined spin />} size="large" />
+          </Flex>
+        }
+        className={
+          isHovering ? 'pokecard__image--animated' : 'pokecard__image--static'
+        }
+      />
     </div>
   )
 }
