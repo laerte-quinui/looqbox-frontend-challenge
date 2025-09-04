@@ -1,20 +1,26 @@
 import { Col, Empty, Flex, Pagination, Row, Typography } from 'antd'
-import { useState } from 'react'
-import { useGetAllPokemon } from '../../../api/usePokemon'
-import type { PokemonTypes } from '../../../types/pokemonTypes'
+import type { PokemonProps, PokemonTypes } from '../../../types/pokemonTypes'
 import PokeCard from './PokeCard'
 
-const PokeGrid = () => {
-  const [currentPage, setCurrentPage] = useState(1)
+interface Props {
+  pokemonCount: number
+  pokemonList: PokemonProps[]
+  isSearching: boolean
+  isLoading: boolean
+  isError: boolean
+  currentPage: number
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+}
 
-  const allPokemonQueries = useGetAllPokemon(currentPage)
-  const pokemonList = allPokemonQueries
-    .map(query => query.data)
-    .filter(pokemon => pokemon !== undefined)
-
-  const isLoading = allPokemonQueries.some(query => query.isLoading)
-  const isError = allPokemonQueries.some(query => query.isError)
-
+const PokeGrid = ({
+  pokemonCount,
+  pokemonList,
+  isSearching,
+  isLoading,
+  isError,
+  currentPage,
+  setCurrentPage
+}: Props) => {
   if (isError) {
     return (
       <Flex
@@ -68,14 +74,17 @@ const PokeGrid = () => {
         })}
       </Row>
 
-      <Pagination
-        total={570}
-        align="center"
-        current={currentPage}
-        showSizeChanger={false}
-        style={{ marginTop: 24 }}
-        onChange={page => setCurrentPage(page)}
-      />
+      {!isSearching && (
+        <Pagination
+          align="center"
+          total={pokemonCount}
+          defaultPageSize={18}
+          current={currentPage}
+          showSizeChanger={false}
+          style={{ marginTop: 24 }}
+          onChange={page => setCurrentPage(page)}
+        />
+      )}
     </>
   )
 }

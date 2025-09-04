@@ -1,7 +1,7 @@
 import { useQueries, useQuery } from '@tanstack/react-query'
 import { getPokemon } from './getPokemon'
 
-export const useGetPokemon = (pokeId: number) => {
+export const useGetPokemon = (pokeId: number | string) => {
   return useQuery({
     queryKey: [pokeId],
     queryFn: () => getPokemon(pokeId)
