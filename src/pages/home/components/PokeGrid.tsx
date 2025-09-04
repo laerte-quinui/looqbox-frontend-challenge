@@ -1,23 +1,17 @@
 import { Col, Row } from 'antd'
-import { useEffect, useState } from 'react'
-import { getAllPokemon } from '../../../api/getPokemon'
-import type { PokemonProps, PokemonTypes } from '../../../types/pokemonTypes'
+import { useGetAllPokemon } from '../../../api/usePokemon'
+import type { PokemonTypes } from '../../../types/pokemonTypes'
 import PokeCard from './PokeCard'
 
 const PokeGrid = () => {
-  const [allPokemon, setAllPokemon] = useState<PokemonProps[]>([])
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getAllPokemon()
-      setAllPokemon(data)
-    }
-    fetchData()
-  }, [])
+  const allPokemonQueries = useGetAllPokemon()
+  const pokemonList = allPokemonQueries
+    .map(query => query.data)
+    .filter(pokemon => pokemon !== undefined)
 
   return (
     <Row justify="center" gutter={[16, 16]} style={{ marginTop: 24 }}>
-      {allPokemon.map(pokemon => {
+      {pokemonList.map(pokemon => {
         const blackWhiteVer =
           pokemon.sprites.versions['generation-v']['black-white']
         const hasAnimatedSprite = blackWhiteVer.animated.front_default !== null

@@ -1,26 +1,11 @@
 import axios from 'axios'
+import type { PokemonProps } from '../types/pokemonTypes'
 
-const limit = 18
-
-export const getAllPokemon = async () => {
-  const data = []
-
-  for (let i = 1; i <= limit; i++)
-    try {
-      const res = await getPokemon(i)
-      data.push(res)
-    } catch (error) {
-      console.log(error)
-    }
-
-  return data
-}
-
-export const getPokemon = async (pokeId: number) => {
+export const getPokemon = async (pokeId: number): Promise<PokemonProps> => {
   try {
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokeId}`)
     return res.data
   } catch (error) {
-    console.log(error)
+    throw new Error('Failed to fetch Pokemon. Error: ' + error)
   }
 }
