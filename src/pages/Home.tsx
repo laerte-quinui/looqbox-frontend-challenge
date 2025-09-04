@@ -1,13 +1,45 @@
 import { SearchOutlined } from '@ant-design/icons'
 import { Col, Flex, Input, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
+import { useEffect, useState } from 'react'
+import { getAllPokemon } from '../api/getPokemon'
 import Logo from '../assets/Logo'
 import PokeCard from '../components/PokeCard'
+import type { PokemonType } from '../components/TypeTag'
+
+type PokemonProps = {
+  id: number
+  name: string
+  sprites: {
+    versions: {
+      'generation-v': {
+        'black-white': {
+          front_default: string
+          animated: {
+            front_default: string
+          }
+        }
+      }
+    }
+  }
+  types: { type: { name: string } }[]
+}
 
 const Home = () => {
+  const [allPokemon, setAllPokemon] = useState<PokemonProps[]>([])
+
   const {
     token: { colorBgContainer }
   } = theme.useToken()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getAllPokemon()
+      setAllPokemon(data)
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <Content
@@ -25,16 +57,24 @@ const Home = () => {
         </Col>
       </Row>
 
-      <Row justify="center" style={{ marginTop: 24 }}>
-        <Col xs={24} sm={12} md={8} lg={4}>
-          <PokeCard
-            id={'001'}
-            name="Bulbasaur"
-            animatedImg="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
-            img="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/1.png"
-            types={['grass', 'poison']}
-          />
-        </Col>
+      <Row justify="center" gutter={[16, 16]} style={{ marginTop: 24 }}>
+        {allPokemon.map(pokemon => (
+          <Col xs={24} sm={12} md={8} lg={4} key={pokemon.name}>
+            <PokeCard
+              id={String(pokemon.id)}
+              name={pokemon.name}
+              animatedImg={
+                pokemon.sprites.versions['generation-v']['black-white'].animated
+                  .front_default
+              }
+              img={
+                pokemon.sprites.versions['generation-v']['black-white']
+                  .front_default
+              }
+              types={pokemon.types.map(type => type.type.name) as PokemonType[]}
+            />
+          </Col>
+        ))}
       </Row>
     </Content>
   )
