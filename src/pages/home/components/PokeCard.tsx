@@ -1,9 +1,9 @@
 import { Card, Flex, Typography } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import { useState } from 'react'
-import '../styles/pokecard.css'
-import type { PokemonTypes } from '../types/pokemonTypes'
-import TypeTag from './TypeTag'
+import TypeTag from '../../../components/TypeTag'
+import '../../../styles/pokecard.css'
+import type { PokemonTypes } from '../../../types/pokemonTypes'
 
 interface Props {
   id: string
