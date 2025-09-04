@@ -1,4 +1,4 @@
-import { Col, Pagination, Row } from 'antd'
+import { Col, Empty, Flex, Pagination, Row, Typography } from 'antd'
 import { useState } from 'react'
 import { useGetAllPokemon } from '../../../api/usePokemon'
 import type { PokemonTypes } from '../../../types/pokemonTypes'
@@ -13,6 +13,26 @@ const PokeGrid = () => {
     .filter(pokemon => pokemon !== undefined)
 
   const isLoading = allPokemonQueries.some(query => query.isLoading)
+  const isError = allPokemonQueries.some(query => query.isError)
+
+  if (isError) {
+    return (
+      <Flex
+        vertical
+        align="center"
+        justify="center"
+        style={{ marginTop: 80, height: '100%', minHeight: '60vh' }}
+      >
+        <Empty
+          description={
+            <Typography.Text disabled>
+              Woops! Something went wrong while loading Pokémon data
+            </Typography.Text>
+          }
+        />
+      </Flex>
+    )
+  }
 
   return (
     <>
