@@ -7,7 +7,7 @@ export const getAllPokemon = async () => {
 
   for (let i = 1; i <= limit; i++)
     try {
-      const res = await getPokemon(i)
+      const res = await getPokemon(800)
       data.push(res)
     } catch (error) {
       console.log(error)

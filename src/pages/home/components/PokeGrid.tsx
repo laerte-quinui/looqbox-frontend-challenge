@@ -20,7 +20,7 @@ const PokeGrid = () => {
       {allPokemon.map(pokemon => {
         const blackWhiteVer =
           pokemon.sprites.versions['generation-v']['black-white']
-        const hasBlackWhite = blackWhiteVer.front_default !== null
+        const hasAnimatedSprite = blackWhiteVer.animated.front_default !== null
 
         return (
           <Col xs={24} sm={12} md={8} lg={4} key={pokemon.name}>
@@ -28,12 +28,12 @@ const PokeGrid = () => {
               id={String(pokemon.id)}
               name={pokemon.name}
               animatedImg={
-                hasBlackWhite
+                hasAnimatedSprite
                   ? blackWhiteVer.animated.front_default
                   : pokemon.sprites.front_default
               }
               img={
-                hasBlackWhite
+                hasAnimatedSprite
                   ? blackWhiteVer.front_default
                   : pokemon.sprites.front_default
               }
