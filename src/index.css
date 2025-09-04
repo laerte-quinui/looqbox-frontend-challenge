@@ -26,3 +26,32 @@ body {
   min-height: 100vh;
   background-color: var(--white);
 }
+
+.container {
+  padding: 0 24px;
+  background-color: var(--white);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    padding: 0 64px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding: 0 88px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container {
+    padding: 0 160px;
+  }
+}

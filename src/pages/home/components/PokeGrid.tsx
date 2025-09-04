@@ -23,7 +23,7 @@ const PokeGrid = () => {
         const hasAnimatedSprite = blackWhiteVer.animated.front_default !== null
 
         return (
-          <Col xs={24} sm={12} md={8} lg={4} key={pokemon.name}>
+          <Col xs={24} sm={12} md={8} lg={6} xxl={4} key={pokemon.name}>
             <PokeCard
               id={String(pokemon.id)}
               name={pokemon.name}

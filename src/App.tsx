@@ -14,7 +14,7 @@ function App() {
         }
       }}
     >
-      <Layout>
+      <Layout className="container">
         <Home />
       </Layout>
     </ConfigProvider>

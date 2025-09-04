@@ -9,9 +9,7 @@ const Home = () => {
   } = theme.useToken()
 
   return (
-    <Content
-      style={{ backgroundColor: colorBgContainer, padding: '64px 24px' }}
-    >
+    <Content style={{ backgroundColor: colorBgContainer, padding: '64px 0px' }}>
       <HomeHeader />
       <PokeGrid />
     </Content>
