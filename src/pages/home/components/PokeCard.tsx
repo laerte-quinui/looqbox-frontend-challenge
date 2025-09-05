@@ -35,7 +35,16 @@ const PokeCard = ({ id, name, img, animatedImg, types, isLoading }: Props) => {
       }
     >
       <Meta
-        title={<Typography.Title level={3}>{name}</Typography.Title>}
+        title={
+          <Typography.Title
+            level={3}
+            style={{
+              textTransform: 'capitalize'
+            }}
+          >
+            {name.split('-').join(' ')}
+          </Typography.Title>
+        }
         description={
           <Flex>
             {types.map(type => (
