@@ -7,13 +7,18 @@ import { createBrowserRouter } from 'react-router'
 import { RouterProvider } from 'react-router/dom'
 
 import './index.css'
-import Home from './pages/home/Home'
+import Home from './pages/home/Index'
+import PokemonDetail from './pages/pokemon-detail/Index'
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Home />
+  },
+  {
+    path: '/pokemon/:id',
+    element: <PokemonDetail />
   }
 ])
 
