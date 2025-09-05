@@ -31,7 +31,7 @@ createRoot(document.getElementById('root')!).render(
             cssVar: true,
             token: {
               colorPrimary: '#00D084',
-              colorSuccess: '#FF6900',
+              orange: '#FF6900',
               colorText: '#172121',
               colorBgContainer: '#FFFFFF'
             }
