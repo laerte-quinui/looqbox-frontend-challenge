@@ -66,6 +66,7 @@ const PokeImage = ({ name, img, animatedImg, isHovering }: PokeImageProps) => {
         src={isHovering ? animatedImg : img}
         alt={`${name} image`}
         preview={false}
+        fallback="https://placehold.co/260.png?text=Image+not+found"
         placeholder={
           <Flex justify="center" align="center" style={{ height: '100%' }}>
             <Spin indicator={<LoadingOutlined spin />} size="large" />
