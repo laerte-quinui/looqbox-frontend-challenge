@@ -18,8 +18,8 @@ const Home = () => {
   const isSearching = searchName.trim() !== ''
   const pageSize = 18
 
-  const searchQuery = useGetPokemon(searchName.toLowerCase())
   const allPokemonQueries = useGetAllPokemon(currentPage, pageSize)
+  const searchQuery = useGetPokemon(searchName.toLowerCase())
 
   const pokemonList: PokemonProps[] = []
 
