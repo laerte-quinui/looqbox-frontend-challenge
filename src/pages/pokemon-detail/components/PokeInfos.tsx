@@ -4,7 +4,7 @@ import TypeTag from '../../../components/TypeTag'
 
 const PokeInfos = () => {
   return (
-    <Row gutter={24}>
+    <Row gutter={24} style={{ height: '100%' }}>
       {/* Image */}
       <Col span={8}>
         <Flex align="center" justify="center" style={{ height: 260 }}>

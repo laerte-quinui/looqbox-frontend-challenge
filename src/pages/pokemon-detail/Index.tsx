@@ -1,12 +1,13 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Button, Col, Divider, Flex, Row, theme } from 'antd'
+import { Button, Col, Flex, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
 import Logo from '../../assets/Logo'
 import PokeInfos from './components/PokeInfos'
+import PokeStats from './components/PokeStats'
 
 const PokemonDetail = () => {
   const {
-    token: { colorBgContainer }
+    token: { colorBgContainer, colorSplit }
   } = theme.useToken()
 
   return (
@@ -26,11 +27,15 @@ const PokemonDetail = () => {
       </Button>
 
       <Row>
-        <Col xs={12}>
+        <Col
+          xs={12}
+          style={{ borderRight: '1px solid', borderColor: colorSplit }}
+        >
           <PokeInfos />
         </Col>
-        <Divider type="vertical" style={{ minHeight: 260 }} />
-        <Col xs={12}>{/* Content for the right column */}</Col>
+        <Col xs={12}>
+          <PokeStats />
+        </Col>
       </Row>
     </Content>
   )
