@@ -2,6 +2,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
 import { useGetPokemon } from '../../api/usePokemon'
+import { useGetSpecies } from '../../api/useSpecies'
 import Logo from '../../assets/Logo'
 import type { PokemonTypes } from '../../types/pokemonTypes'
 import EvolutionChain from './components/EvolutionChain'
@@ -10,12 +11,14 @@ import PokeInfos from './components/PokeInfos'
 import PokeStats from './components/PokeStats'
 
 const PokemonDetail = () => {
-  const { data: pokeData, isLoading } = useGetPokemon(92)
+  const { data: pokeData, isLoading } = useGetPokemon(150)
+  const { data: speciesData } = useGetSpecies(150)
+
   const {
     token: { colorBgContainer, colorSplit }
   } = theme.useToken()
 
-  if (isLoading || !pokeData) {
+  if (isLoading || !pokeData || !speciesData) {
     return <div>Loading...</div>
   }
 
@@ -29,7 +32,10 @@ const PokemonDetail = () => {
         .front_default || pokeData.sprites.front_default,
     shinySprite:
       pokeData.sprites.versions['generation-v']['black-white'].animated
-        .front_shiny || pokeData.sprites.front_shiny
+        .front_shiny || pokeData.sprites.front_shiny,
+    description:
+      speciesData?.flavor_text_entries[6]?.flavor_text.replace(/\f/g, ' ') ||
+      speciesData?.flavor_text_entries[0]?.flavor_text.replace(/\f/g, ' ')
   }
 
   return (

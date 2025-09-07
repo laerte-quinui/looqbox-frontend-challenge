@@ -13,11 +13,12 @@ interface Props {
     cry: string
     sprite: string
     shinySprite: string
+    description: string
   }
 }
 
 const PokeInfos = ({ data }: Props) => {
-  const { id, name, types, cry, sprite, shinySprite } = data
+  const { id, name, types, cry, sprite, shinySprite, description } = data
   const [playing, toggleAudio] = useAudio(cry)
   const [shinyVisible, setShinyVisible] = useState(false)
 
@@ -114,9 +115,7 @@ const PokeInfos = ({ data }: Props) => {
           </Flex>
 
           <Typography.Paragraph type="secondary" style={{ marginTop: '16px' }}>
-            BULBASAUR can be seen napping in bright sunlight. There is a seed on
-            its back. By soaking up the sun’s rays, the seed grows progressively
-            larger.
+            {description}
           </Typography.Paragraph>
         </Flex>
       </Col>
