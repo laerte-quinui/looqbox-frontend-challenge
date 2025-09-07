@@ -2,6 +2,7 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
 import Logo from '../../assets/Logo'
+import PokeEffectiveness from './components/PokeEffectiveness'
 import PokeInfos from './components/PokeInfos'
 import PokeStats from './components/PokeStats'
 
@@ -36,6 +37,13 @@ const PokemonDetail = () => {
         <Col xs={12}>
           <PokeStats />
         </Col>
+      </Row>
+
+      <Row>
+        <Col xs={12}>
+          <PokeEffectiveness />
+        </Col>
+        <Col xs={12}></Col>
       </Row>
     </Content>
   )
