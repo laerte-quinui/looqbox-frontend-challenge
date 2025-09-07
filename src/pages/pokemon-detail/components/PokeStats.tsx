@@ -16,9 +16,9 @@ const PokeStats = () => {
   ]
 
   return (
-    <Row gutter={24} style={{ height: '100%' }}>
+    <Row gutter={[24, 24]} style={{ height: '100%' }}>
       {/* Measurements */}
-      <Col span={12}>
+      <Col xs={24} md={12}>
         <Flex vertical justify="center" gap={80} style={{ height: '100%' }}>
           {measurements.map(measurement => (
             <Statistic {...measurement} style={{ textAlign: 'center' }} />
@@ -27,10 +27,10 @@ const PokeStats = () => {
       </Col>
 
       {/* Stats */}
-      <Col span={12}>
+      <Col xs={24} md={12}>
         <Row style={{ height: '100%' }}>
           {stats.map(stat => (
-            <Col span={8} key={stat.name}>
+            <Col xs={12} sm={8} lg={12} xl={8} key={stat.name}>
               <DonutChart data={stat} />
             </Col>
           ))}

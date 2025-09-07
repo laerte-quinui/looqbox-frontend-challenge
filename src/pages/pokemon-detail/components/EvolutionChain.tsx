@@ -24,7 +24,7 @@ const EvolutionChain = () => {
   return (
     <Row gutter={[16, 16]}>
       {data.map(pokemon => (
-        <Col span={8} key={pokemon.id}>
+        <Col xs={24} sm={12} md={8} key={pokemon.id}>
           <Card
             hoverable
             cover={

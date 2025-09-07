@@ -23,28 +23,25 @@ const PokemonDetail = () => {
         color="default"
         variant="outlined"
         icon={<ArrowLeftOutlined />}
-        style={{ marginBottom: 40 }}
+        style={{ marginBottom: 40, marginTop: 24 }}
       >
         Go Back
       </Button>
 
-      <Row>
-        <Col
-          xs={12}
-          style={{ borderRight: '1px solid', borderColor: colorSplit }}
-        >
+      <Row gutter={[0, 40]}>
+        <Col xs={24} lg={12} style={{ borderRight: `1px solid ${colorSplit}` }}>
           <PokeInfos />
         </Col>
-        <Col xs={12}>
+        <Col xs={24} lg={12}>
           <PokeStats />
         </Col>
       </Row>
 
-      <Row style={{ marginTop: 80 }}>
-        <Col xs={12}>
+      <Row gutter={[0, 40]} style={{ marginTop: 80 }}>
+        <Col xs={24} xl={12}>
           <PokeEffectiveness />
         </Col>
-        <Col xs={12}>
+        <Col xs={24} xl={12}>
           <EvolutionChain />
         </Col>
       </Row>

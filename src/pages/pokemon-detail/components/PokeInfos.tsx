@@ -4,23 +4,30 @@ import TypeTag from '../../../components/TypeTag'
 
 const PokeInfos = () => {
   return (
-    <Row gutter={24} style={{ height: '100%' }}>
+    <Row gutter={[24, 24]} style={{ height: '100%' }}>
       {/* Image */}
-      <Col span={8}>
-        <Flex align="center" justify="center" style={{ height: 260 }}>
+      <Col xs={24} sm={12} lg={8}>
+        <Flex
+          align="center"
+          justify="center"
+          style={{ minHeight: 260, overflow: 'hidden', borderRadius: 16 }}
+        >
           <Image
             src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
             alt="bulbasaur image"
             width="100%"
             fallback="https://placehold.co/260.png?text=Image+not+found"
             style={{ imageRendering: 'pixelated', maxHeight: '100%' }}
+            preview={{ style: { imageRendering: 'pixelated' }, width: 600 }}
           />
         </Flex>
       </Col>
 
       {/* Infos */}
       <Col
-        span={15}
+        xs={24}
+        sm={12}
+        lg={15}
         style={{
           gap: 32,
           display: 'flex',

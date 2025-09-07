@@ -9,9 +9,9 @@ const PokeEffectiveness = () => {
   ]
 
   return (
-    <Row style={{ height: '100%' }}>
+    <Row gutter={[0, 24]} style={{ height: '100%' }}>
       {data.map(d => (
-        <Col span={12}>
+        <Col xs={24} sm={12}>
           <Typography.Title level={3}>
             {d.effective ? 'Super-effective against' : 'Super-weak against'}
           </Typography.Title>
