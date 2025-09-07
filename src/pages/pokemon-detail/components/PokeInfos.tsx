@@ -1,5 +1,6 @@
 import { PlayCircleOutlined, StarOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Image, Row, Typography } from 'antd'
+import { useState } from 'react'
 import TypeTag from '../../../components/TypeTag'
 import type { PokemonTypes } from '../../../types/pokemonTypes'
 import { useAudio } from '../../../utils/useAudio'
@@ -18,6 +19,24 @@ interface Props {
 const PokeInfos = ({ data }: Props) => {
   const { id, name, types, cry, sprite, shinySprite } = data
   const [playing, toggleAudio] = useAudio(cry)
+  const [shinyVisible, setShinyVisible] = useState(false)
+
+  const buttons = [
+    {
+      text: playing ? 'Stop Cry' : 'Play Cry',
+      icon: <PlayCircleOutlined />,
+      color: 'orange' as const,
+      variant: 'solid' as const,
+      onClick: toggleAudio
+    },
+    {
+      text: 'See Shiny',
+      icon: <StarOutlined />,
+      color: 'default' as const,
+      variant: 'outlined' as const,
+      onClick: () => setShinyVisible(true)
+    }
+  ]
 
   return (
     <Row gutter={[24, 24]} style={{ height: '100%' }}>
@@ -53,17 +72,27 @@ const PokeInfos = ({ data }: Props) => {
       >
         {/* Buttons */}
         <Flex align="center" gap={8}>
-          <Button
-            variant="solid"
-            color="orange"
-            onClick={toggleAudio}
-            icon={<PlayCircleOutlined />}
-          >
-            {playing ? 'Stop Cry' : 'Play Cry'}
-          </Button>
-          <Button variant="outlined" color="default" icon={<StarOutlined />}>
-            See Shiny
-          </Button>
+          {buttons.map(btn => (
+            <Button key={btn.text} {...btn}>
+              {btn.text}
+            </Button>
+          ))}
+          {/* Shiny Modal */}
+          <Image
+            width={200}
+            src={shinySprite}
+            style={{ display: 'none' }}
+            alt={`${name} shiny image`}
+            preview={{
+              width: 600,
+              src: shinySprite,
+              visible: shinyVisible,
+              style: { imageRendering: 'pixelated' },
+              onVisibleChange: value => {
+                setShinyVisible(value)
+              }
+            }}
+          />
         </Flex>
 
         {/* Details */}
