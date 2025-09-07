@@ -1,18 +1,33 @@
 import { Col, Flex, Row, Statistic } from 'antd'
 import DonutChart from '../../../components/DonutChart'
 
-const PokeStats = () => {
+interface Props {
+  data: {
+    height: number
+    weight: number
+    stats: {
+      hp: number
+      attack: number
+      defense: number
+      specialAttack: number
+      specialDefense: number
+      speed: number
+    }
+  }
+}
+
+const PokeStats = ({ data }: Props) => {
   const measurements = [
-    { title: 'Weight', value: 27.8, suffix: 'kg' },
-    { title: 'Height', value: 153.3, suffix: 'cm' }
+    { title: 'Weight', value: data.weight, suffix: 'kg' },
+    { title: 'Height', value: data.height, suffix: 'm' }
   ]
   const stats = [
-    { name: 'Base Health', value: 45 },
-    { name: 'Base Attack', value: 49 },
-    { name: 'Base Defense', value: 49 },
-    { name: 'Base Speed', value: 69 },
-    { name: 'Special Attack', value: 65 },
-    { name: 'Special Defense', value: 65 }
+    { name: 'Base Health', value: data.stats.hp },
+    { name: 'Base Attack', value: data.stats.attack },
+    { name: 'Base Defense', value: data.stats.defense },
+    { name: 'Base Speed', value: data.stats.speed },
+    { name: 'Special Attack', value: data.stats.specialAttack },
+    { name: 'Special Defense', value: data.stats.specialDefense }
   ]
 
   return (

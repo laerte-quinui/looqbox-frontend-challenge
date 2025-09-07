@@ -11,8 +11,8 @@ import PokeInfos from './components/PokeInfos'
 import PokeStats from './components/PokeStats'
 
 const PokemonDetail = () => {
-  const { data: pokeData, isLoading } = useGetPokemon(150)
-  const { data: speciesData } = useGetSpecies(150)
+  const { data: pokeData, isLoading } = useGetPokemon(1)
+  const { data: speciesData } = useGetSpecies(1)
 
   const {
     token: { colorBgContainer, colorSplit }
@@ -38,6 +38,25 @@ const PokemonDetail = () => {
       speciesData?.flavor_text_entries[0]?.flavor_text.replace(/\f/g, ' ')
   }
 
+  const pokeStats = {
+    height: pokeData.height / 10, // Convert to meter
+    weight: pokeData.weight / 10, // Convert to kg
+    stats: {
+      hp: pokeData.stats.find(s => s.stat.name === 'hp')?.base_stat ?? 0,
+      attack:
+        pokeData.stats.find(s => s.stat.name === 'attack')?.base_stat ?? 0,
+      defense:
+        pokeData.stats.find(s => s.stat.name === 'defense')?.base_stat ?? 0,
+      specialAttack:
+        pokeData.stats.find(s => s.stat.name === 'special-attack')?.base_stat ??
+        0,
+      specialDefense:
+        pokeData.stats.find(s => s.stat.name === 'special-defense')
+          ?.base_stat ?? 0,
+      speed: pokeData.stats.find(s => s.stat.name === 'speed')?.base_stat ?? 0
+    }
+  }
+
   return (
     <Content style={{ backgroundColor: colorBgContainer, padding: '64px 0px' }}>
       <Flex align="center" justify="center">
@@ -59,7 +78,7 @@ const PokemonDetail = () => {
           <PokeInfos data={pokeInfos} />
         </Col>
         <Col xs={24} lg={12}>
-          <PokeStats />
+          <PokeStats data={pokeStats} />
         </Col>
       </Row>
 
