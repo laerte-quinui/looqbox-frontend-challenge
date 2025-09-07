@@ -4,11 +4,12 @@ import { Content } from 'antd/es/layout/layout'
 import { useGetPokemon } from '../../api/usePokemon'
 import { useGetSpecies } from '../../api/useSpecies'
 import Logo from '../../assets/Logo'
-import type { PokemonTypes } from '../../types/pokemonTypes'
 import EvolutionChain from './components/EvolutionChain'
 import PokeEffectiveness from './components/PokeEffectiveness'
 import PokeInfos from './components/PokeInfos'
 import PokeStats from './components/PokeStats'
+import { formatPokeInfo } from './data/pokeInfo'
+import { formatPokeStats } from './data/pokeStats'
 
 const PokemonDetail = () => {
   const { data: pokeData, isLoading } = useGetPokemon(1)
@@ -22,40 +23,8 @@ const PokemonDetail = () => {
     return <div>Loading...</div>
   }
 
-  const pokeInfos = {
-    id: pokeData.id,
-    name: pokeData.name,
-    types: pokeData.types.map(type => type.type.name) as PokemonTypes[],
-    cry: pokeData.cries.latest,
-    sprite:
-      pokeData.sprites.versions['generation-v']['black-white'].animated
-        .front_default || pokeData.sprites.front_default,
-    shinySprite:
-      pokeData.sprites.versions['generation-v']['black-white'].animated
-        .front_shiny || pokeData.sprites.front_shiny,
-    description:
-      speciesData?.flavor_text_entries[6]?.flavor_text.replace(/\f/g, ' ') ||
-      speciesData?.flavor_text_entries[0]?.flavor_text.replace(/\f/g, ' ')
-  }
-
-  const pokeStats = {
-    height: pokeData.height / 10, // Convert to meter
-    weight: pokeData.weight / 10, // Convert to kg
-    stats: {
-      hp: pokeData.stats.find(s => s.stat.name === 'hp')?.base_stat ?? 0,
-      attack:
-        pokeData.stats.find(s => s.stat.name === 'attack')?.base_stat ?? 0,
-      defense:
-        pokeData.stats.find(s => s.stat.name === 'defense')?.base_stat ?? 0,
-      specialAttack:
-        pokeData.stats.find(s => s.stat.name === 'special-attack')?.base_stat ??
-        0,
-      specialDefense:
-        pokeData.stats.find(s => s.stat.name === 'special-defense')
-          ?.base_stat ?? 0,
-      speed: pokeData.stats.find(s => s.stat.name === 'speed')?.base_stat ?? 0
-    }
-  }
+  const pokeInfos = formatPokeInfo(pokeData, speciesData)
+  const pokeStats = formatPokeStats(pokeData)
 
   return (
     <Content style={{ backgroundColor: colorBgContainer, padding: '64px 0px' }}>
