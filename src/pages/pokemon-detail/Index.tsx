@@ -10,7 +10,7 @@ import PokeInfos from './components/PokeInfos'
 import PokeStats from './components/PokeStats'
 
 const PokemonDetail = () => {
-  const { data: pokeData, isLoading } = useGetPokemon(10)
+  const { data: pokeData, isLoading } = useGetPokemon(92)
   const {
     token: { colorBgContainer, colorSplit }
   } = theme.useToken()

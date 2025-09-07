@@ -2,6 +2,7 @@ import { PlayCircleOutlined, StarOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Image, Row, Typography } from 'antd'
 import TypeTag from '../../../components/TypeTag'
 import type { PokemonTypes } from '../../../types/pokemonTypes'
+import { useAudio } from '../../../utils/useAudio'
 
 interface Props {
   data: {
@@ -16,6 +17,7 @@ interface Props {
 
 const PokeInfos = ({ data }: Props) => {
   const { id, name, types, cry, sprite, shinySprite } = data
+  const [playing, toggleAudio] = useAudio(cry)
 
   return (
     <Row gutter={[24, 24]} style={{ height: '100%' }}>
@@ -51,8 +53,13 @@ const PokeInfos = ({ data }: Props) => {
       >
         {/* Buttons */}
         <Flex align="center" gap={8}>
-          <Button variant="solid" color="orange" icon={<PlayCircleOutlined />}>
-            Play Cry
+          <Button
+            variant="solid"
+            color="orange"
+            onClick={toggleAudio}
+            icon={<PlayCircleOutlined />}
+          >
+            {playing ? 'Stop Cry' : 'Play Cry'}
           </Button>
           <Button variant="outlined" color="default" icon={<StarOutlined />}>
             See Shiny
