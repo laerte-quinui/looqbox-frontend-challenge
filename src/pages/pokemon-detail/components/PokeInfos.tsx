@@ -1,8 +1,22 @@
 import { PlayCircleOutlined, StarOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Image, Row, Typography } from 'antd'
 import TypeTag from '../../../components/TypeTag'
+import type { PokemonTypes } from '../../../types/pokemonTypes'
 
-const PokeInfos = () => {
+interface Props {
+  data: {
+    id: number
+    name: string
+    types: PokemonTypes[]
+    cry: string
+    sprite: string
+    shinySprite: string
+  }
+}
+
+const PokeInfos = ({ data }: Props) => {
+  const { id, name, types, cry, sprite, shinySprite } = data
+
   return (
     <Row gutter={[24, 24]} style={{ height: '100%' }}>
       {/* Image */}
@@ -13,8 +27,8 @@ const PokeInfos = () => {
           style={{ minHeight: 260, overflow: 'hidden', borderRadius: 16 }}
         >
           <Image
-            src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/1.gif"
-            alt="bulbasaur image"
+            src={sprite}
+            alt={`${name} image`}
             width="100%"
             fallback="https://placehold.co/260.png?text=Image+not+found"
             style={{ imageRendering: 'pixelated', maxHeight: '100%' }}
@@ -48,15 +62,19 @@ const PokeInfos = () => {
         {/* Details */}
         <Flex vertical>
           <div>
-            <Typography.Text disabled>#1</Typography.Text>
-            <Typography.Title style={{ margin: 0 }} level={1}>
-              Bulbasaur
+            <Typography.Text disabled>#{id}</Typography.Text>
+            <Typography.Title
+              level={1}
+              style={{ margin: 0, textTransform: 'capitalize' }}
+            >
+              {name}
             </Typography.Title>
           </div>
 
           <Flex style={{ marginTop: '8px' }}>
-            <TypeTag type="grass" />
-            <TypeTag type="poison" />
+            {types.map(type => (
+              <TypeTag key={type} type={type} />
+            ))}
           </Flex>
 
           <Typography.Paragraph type="secondary" style={{ marginTop: '16px' }}>
