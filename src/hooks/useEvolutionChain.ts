@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { getEvolutionChain } from './getEvolutionChain'
+import { getEvolutionChain } from '../api/getEvolutionChain'
 
 export const useGetEvolutionChain = (url: string) => {
   return useQuery({
