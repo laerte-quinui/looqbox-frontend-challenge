@@ -48,7 +48,9 @@ const PokemonDetail = () => {
   return (
     <Content style={{ backgroundColor: colorBgContainer, padding: '64px 0px' }}>
       <Flex align="center" justify="center">
-        <Logo width={124} height={32} />
+        <Link to="/">
+          <Logo width={124} height={32} />
+        </Link>
       </Flex>
 
       <Link to="/">
