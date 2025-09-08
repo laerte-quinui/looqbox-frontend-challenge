@@ -39,7 +39,11 @@ const PokeStats = ({ data, isLoading }: Props) => {
       <Col xs={24} md={12}>
         <Flex vertical justify="center" gap={80} style={{ height: '100%' }}>
           {measurements.map(measurement => (
-            <Statistic {...measurement} style={{ textAlign: 'center' }} />
+            <Statistic
+              key={measurement.title}
+              {...measurement}
+              style={{ textAlign: 'center' }}
+            />
           ))}
         </Flex>
       </Col>
@@ -64,7 +68,12 @@ const LoadingPokeStats = () => {
       <Col xs={24} md={12}>
         <Flex vertical justify="center" gap={80} style={{ height: '100%' }}>
           {Array.from({ length: 2 }).map((_, index) => (
-            <Flex key={index} vertical align="center" gap={8}>
+            <Flex
+              key={'measurement-skeleton-' + index}
+              vertical
+              align="center"
+              gap={8}
+            >
               <Skeleton.Node style={{ height: 16, width: 80 }} />
               <Skeleton.Node style={{ height: 32, width: 120 }} />
             </Flex>
@@ -76,7 +85,7 @@ const LoadingPokeStats = () => {
       <Col xs={24} md={12}>
         <Row style={{ height: '100%' }}>
           {Array.from({ length: 6 }).map((_, index) => (
-            <Col xs={12} sm={8} lg={12} xl={8} key={index}>
+            <Col xs={12} sm={8} lg={12} xl={8} key={'stat-skeleton-' + index}>
               <Skeleton.Avatar size={80} />
             </Col>
           ))}
