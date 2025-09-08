@@ -61,7 +61,7 @@ This is my solution for the proposed frontend chalenge.
 - Acces the dev branch running: `$ git checkout dev`
 - Install the dependencies with `$ npm install`
 - Run the project using `$ npm run dev`
-- Access the provided localhost url and voilà! Have fun
+- Access the provided localhost url and voilà! Have fun!
 
 ## My process
 
@@ -85,7 +85,7 @@ After finishing the design, I started the project by cloning the repository in m
 
 Then, I divided my process in simple steps. For each page, I would:
 
-- Create the page component,
+- Create the page component
 - Create components related to the page
 - Mock data
 - Implement responsiviness
