@@ -1,7 +1,7 @@
-import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons'
-import { Button, Col, Flex, Row, Spin, theme } from 'antd'
+import { ArrowLeftOutlined } from '@ant-design/icons'
+import { Button, Col, Flex, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
-import { Link, useParams } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 import { useGetEvolutionChain } from '../../api/useEvolutionChain'
 import { useGetPokemon } from '../../api/usePokemon'
 import { useGetSpecies } from '../../api/useSpecies'
@@ -11,6 +11,7 @@ import EvolutionChain from './components/EvolutionChain'
 import PokeEffectiveness from './components/PokeEffectiveness'
 import PokeInfos from './components/PokeInfos'
 import PokeStats from './components/PokeStats'
+import StateHandlers from './components/StateHandlers'
 import { extractSpecies } from './data/evolutionChain'
 import { formatTypeEffectiveness } from './data/pokeEffectiveness'
 import { formatPokeInfo } from './data/pokeInfo'
@@ -18,52 +19,40 @@ import { formatPokeStats } from './data/pokeStats'
 
 const PokemonDetail = () => {
   const params = useParams()
+  const navigate = useNavigate()
+  const {
+    token: { colorBgContainer, colorSplit }
+  } = theme.useToken()
 
   const {
     data: pokeData,
     isFetching: pokeLoading,
-    isError: pokeError
+    error: pokeError
   } = useGetPokemon(Number(params.id))
   const {
     data: speciesData,
     isFetching: speciesLoading,
-    isError: speciesError
+    error: speciesError
   } = useGetSpecies(Number(params.id))
   const {
     data: typesData,
     isFetching: typesLoading,
-    isError: typesError
+    error: typesError
   } = useGetTypes(pokeData?.types[0].type.name || '')
   const {
     data: evolutionChainData,
     isFetching: evolutionChainLoading,
-    isError: evolutionChainError
+    error: evolutionChainError
   } = useGetEvolutionChain(speciesData?.evolution_chain.url || '')
 
   const isLoading =
     pokeLoading || speciesLoading || typesLoading || evolutionChainLoading
   const isError = pokeError || speciesError || typesError || evolutionChainError
 
-  const {
-    token: { colorBgContainer, colorSplit }
-  } = theme.useToken()
+  if (isError?.message.includes('404')) navigate('/not-found')
 
-  if (
-    isLoading ||
-    !pokeData ||
-    !speciesData ||
-    !typesData ||
-    !evolutionChainData
-  ) {
-    return (
-      <Flex align="center" justify="center" style={{ height: '100vh' }}>
-        <Spin
-          size="large"
-          indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />}
-        />
-      </Flex>
-    )
-  }
+  if (!pokeData || !speciesData || !typesData || !evolutionChainData)
+    return StateHandlers({ isError: !!isError, isLoading })
 
   const pokeInfos = formatPokeInfo(pokeData, speciesData)
   const pokeStats = formatPokeStats(pokeData)
