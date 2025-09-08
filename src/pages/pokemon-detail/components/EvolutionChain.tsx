@@ -1,6 +1,7 @@
 import { ExportOutlined } from '@ant-design/icons'
 import { Card, Col, Image, Row, Typography } from 'antd'
 import Meta from 'antd/es/card/Meta'
+import { Link } from 'react-router'
 
 interface Props {
   data: {
@@ -26,29 +27,35 @@ const EvolutionChain = ({ data }: Props) => {
       <Row gutter={[16, 16]}>
         {evolutionData.map(pokemon => (
           <Col xs={24} sm={12} md={8} key={pokemon.id}>
-            <Card
-              hoverable
-              cover={
-                <Image
-                  src={pokemon.img}
-                  alt={pokemon.name}
-                  preview={false}
-                  style={{ imageRendering: 'pixelated' }}
-                />
-              }
-              extra={
-                <a
-                  href={`/pokemon/${pokemon.id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <ExportOutlined />
-                </a>
-              }
-              styles={{ header: { border: 0, minHeight: 40 } }}
+            <Link
+              to={`/pokemon/${pokemon.id}`}
+              target="_blank"
+              rel="noreferrer"
             >
-              <Meta title={pokemon.name} style={{ textAlign: 'center' }} />
-            </Card>
+              <Card
+                hoverable
+                cover={
+                  <Image
+                    src={pokemon.img}
+                    alt={pokemon.name}
+                    preview={false}
+                    style={{ imageRendering: 'pixelated' }}
+                  />
+                }
+                extra={
+                  <a
+                    href={`/pokemon/${pokemon.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <ExportOutlined />
+                  </a>
+                }
+                styles={{ header: { border: 0, minHeight: 40 } }}
+              >
+                <Meta title={pokemon.name} style={{ textAlign: 'center' }} />
+              </Card>
+            </Link>
           </Col>
         ))}
       </Row>
