@@ -7,7 +7,7 @@ export const formatPokeInfo = (
 ) => {
   return {
     id: pokeData.id,
-    name: pokeData.name,
+    name: pokeData.name.split('-').join(' '),
     types: pokeData.types.map(type => type.type.name) as PokemonTypes[],
     cry: pokeData.cries.latest,
     sprite:
