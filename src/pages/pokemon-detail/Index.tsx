@@ -1,7 +1,7 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
-import { useParams } from 'react-router'
+import { Link, useParams } from 'react-router'
 import { useGetEvolutionChain } from '../../api/useEvolutionChain'
 import { useGetPokemon } from '../../api/usePokemon'
 import { useGetSpecies } from '../../api/useSpecies'
@@ -51,15 +51,17 @@ const PokemonDetail = () => {
         <Logo width={124} height={32} />
       </Flex>
 
-      <Button
-        size="small"
-        color="default"
-        variant="outlined"
-        icon={<ArrowLeftOutlined />}
-        style={{ marginBottom: 40, marginTop: 24 }}
-      >
-        Go Back
-      </Button>
+      <Link to="/">
+        <Button
+          size="small"
+          color="default"
+          variant="outlined"
+          style={{ marginBottom: 40, marginTop: 24 }}
+          icon={<ArrowLeftOutlined />}
+        >
+          Go Back
+        </Button>
+      </Link>
 
       <Row gutter={[0, 40]}>
         <Col xs={24} lg={12} style={{ borderRight: `1px solid ${colorSplit}` }}>
