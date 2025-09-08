@@ -45,7 +45,7 @@ const EvolutionChain = ({ data, isLoading }: Props) => {
                     style={{ imageRendering: 'pixelated' }}
                   />
                 }
-                extra={<ExportOutlined />}
+                extra={<ExportOutlined style={{ color: '#00D084' }} />}
                 styles={{ header: { border: 0, minHeight: 40 } }}
               >
                 <Meta title={pokemon.name} style={{ textAlign: 'center' }} />
