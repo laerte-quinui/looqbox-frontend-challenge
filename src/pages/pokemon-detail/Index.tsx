@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { Button, Col, Flex, Row, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
+import { useParams } from 'react-router'
 import { useGetEvolutionChain } from '../../api/useEvolutionChain'
 import { useGetPokemon } from '../../api/usePokemon'
 import { useGetSpecies } from '../../api/useSpecies'
@@ -16,8 +17,10 @@ import { formatPokeInfo } from './data/pokeInfo'
 import { formatPokeStats } from './data/pokeStats'
 
 const PokemonDetail = () => {
-  const { data: pokeData, isLoading } = useGetPokemon(350)
-  const { data: speciesData } = useGetSpecies(350)
+  const params = useParams()
+
+  const { data: pokeData, isLoading } = useGetPokemon(Number(params.id))
+  const { data: speciesData } = useGetSpecies(Number(params.id))
   const { data: typesData } = useGetTypes(pokeData?.types[0].type.name || '')
   const { data: evolutionChainData } = useGetEvolutionChain(
     speciesData?.evolution_chain.url || ''
