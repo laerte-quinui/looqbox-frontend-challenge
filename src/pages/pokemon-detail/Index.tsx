@@ -18,7 +18,7 @@ const PokemonDetail = () => {
   const params = useParams()
   const navigate = useNavigate()
   const {
-    token: { colorBgContainer, colorSplit }
+    token: { colorBgContainer, colorSplit, screenLG }
   } = theme.useToken()
 
   const {
@@ -59,7 +59,17 @@ const PokemonDetail = () => {
       </Link>
 
       <Row gutter={[0, 40]}>
-        <Col xs={24} lg={12} style={{ borderRight: `1px solid ${colorSplit}` }}>
+        <Col
+          xs={24}
+          lg={12}
+          style={{
+            borderRight:
+              window.innerWidth > screenLG ? `1px solid ${colorSplit}` : `0px`,
+            borderBottom:
+              window.innerWidth < screenLG ? `1px solid ${colorSplit}` : `0px`,
+            paddingBottom: window.innerWidth < screenLG ? 32 : 0
+          }}
+        >
           <PokeInfos data={pokeInfos} isLoading={isLoading} />
         </Col>
         <Col xs={24} lg={12}>
