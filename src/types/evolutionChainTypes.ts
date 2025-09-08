@@ -1,5 +1,6 @@
-type EvolutionChain = {
+export type EvolutionChain = {
   species: {
+    url: string
     name: string
   }
   evolves_to: EvolutionChain[]
