@@ -8,6 +8,7 @@ import { RouterProvider } from 'react-router/dom'
 
 import './index.css'
 import Home from './pages/home/Index'
+import NotFound from './pages/not-found/Index'
 import PokemonDetail from './pages/pokemon-detail/Index'
 
 const queryClient = new QueryClient()
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/pokemon/:id',
     element: <PokemonDetail />
+  },
+  {
+    path: '*',
+    element: <NotFound />
   }
 ])
 
