@@ -17,7 +17,8 @@ export const formatPokeInfo = (
       pokeData.sprites.versions['generation-v']['black-white'].animated
         .front_shiny || pokeData.sprites.front_shiny,
     description:
-      speciesData?.flavor_text_entries[6]?.flavor_text.replace(/\f/g, ' ') ||
-      speciesData?.flavor_text_entries[0]?.flavor_text.replace(/\f/g, ' ')
+      speciesData?.flavor_text_entries
+        .find(entry => entry.language.name === 'en')
+        ?.flavor_text.replace(/\f/g, ' ') || ''
   }
 }
