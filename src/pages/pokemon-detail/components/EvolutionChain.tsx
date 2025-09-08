@@ -1,5 +1,5 @@
 import { ExportOutlined } from '@ant-design/icons'
-import { Card, Col, Image, Row, Typography } from 'antd'
+import { Card, Col, Image, Row, Skeleton, Typography } from 'antd'
 import Meta from 'antd/es/card/Meta'
 import { Link } from 'react-router'
 
@@ -8,9 +8,10 @@ interface Props {
     id: string
     name: string
   }[]
+  isLoading?: boolean
 }
 
-const EvolutionChain = ({ data }: Props) => {
+const EvolutionChain = ({ data, isLoading }: Props) => {
   const evolutionData = data.map(pokemon => ({
     id: pokemon.id,
     name: pokemon.name
@@ -19,6 +20,8 @@ const EvolutionChain = ({ data }: Props) => {
       .replace(/\b\w/g, char => char.toUpperCase()),
     img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`
   }))
+
+  if (isLoading) return <LoadingEvolutionChain />
 
   return (
     <>
@@ -60,6 +63,18 @@ const EvolutionChain = ({ data }: Props) => {
         ))}
       </Row>
     </>
+  )
+}
+
+const LoadingEvolutionChain = () => {
+  return (
+    <Row gutter={[16, 16]}>
+      {Array.from({ length: 3 }).map((_, index) => (
+        <Col xs={24} sm={12} md={8} key={index}>
+          <Skeleton.Node style={{ height: 320, width: 260 }} />
+        </Col>
+      ))}
+    </Row>
   )
 }
 

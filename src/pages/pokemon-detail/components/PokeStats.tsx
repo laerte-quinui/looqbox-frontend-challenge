@@ -1,4 +1,4 @@
-import { Col, Flex, Row, Statistic } from 'antd'
+import { Col, Flex, Row, Skeleton, Statistic } from 'antd'
 import DonutChart from '../../../components/DonutChart'
 
 interface Props {
@@ -14,9 +14,10 @@ interface Props {
       speed: number
     }
   }
+  isLoading?: boolean
 }
 
-const PokeStats = ({ data }: Props) => {
+const PokeStats = ({ data, isLoading }: Props) => {
   const measurements = [
     { title: 'Weight', value: data.weight, suffix: 'kg' },
     { title: 'Height', value: data.height, suffix: 'm' }
@@ -29,6 +30,8 @@ const PokeStats = ({ data }: Props) => {
     { name: 'Special Attack', value: data.stats.specialAttack },
     { name: 'Special Defense', value: data.stats.specialDefense }
   ]
+
+  if (isLoading) return <LoadingPokeStats />
 
   return (
     <Row gutter={[24, 24]} style={{ height: '100%' }}>
@@ -47,6 +50,34 @@ const PokeStats = ({ data }: Props) => {
           {stats.map(stat => (
             <Col xs={12} sm={8} lg={12} xl={8} key={stat.name}>
               <DonutChart data={stat} />
+            </Col>
+          ))}
+        </Row>
+      </Col>
+    </Row>
+  )
+}
+
+const LoadingPokeStats = () => {
+  return (
+    <Row gutter={[24, 24]} style={{ height: '100%' }}>
+      <Col xs={24} md={12}>
+        <Flex vertical justify="center" gap={80} style={{ height: '100%' }}>
+          {Array.from({ length: 2 }).map((_, index) => (
+            <Flex key={index} vertical align="center" gap={8}>
+              <Skeleton.Node style={{ height: 16, width: 80 }} />
+              <Skeleton.Node style={{ height: 32, width: 120 }} />
+            </Flex>
+          ))}
+        </Flex>
+      </Col>
+
+      {/* Stats */}
+      <Col xs={24} md={12}>
+        <Row style={{ height: '100%' }}>
+          {Array.from({ length: 6 }).map((_, index) => (
+            <Col xs={12} sm={8} lg={12} xl={8} key={index}>
+              <Skeleton.Avatar size={80} />
             </Col>
           ))}
         </Row>

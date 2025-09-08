@@ -1,5 +1,5 @@
 import { PlayCircleOutlined, StarOutlined } from '@ant-design/icons'
-import { Button, Col, Flex, Image, Row, Typography } from 'antd'
+import { Button, Col, Flex, Image, Row, Skeleton, Typography } from 'antd'
 import { useState } from 'react'
 import TypeTag from '../../../components/TypeTag'
 import type { PokemonTypes } from '../../../types/pokemonTypes'
@@ -15,9 +15,10 @@ interface Props {
     shinySprite: string
     description: string
   }
+  isLoading?: boolean
 }
 
-const PokeInfos = ({ data }: Props) => {
+const PokeInfos = ({ data, isLoading }: Props) => {
   const { id, name, types, cry, sprite, shinySprite, description } = data
   const [playing, toggleAudio] = useAudio(cry)
   const [shinyVisible, setShinyVisible] = useState(false)
@@ -38,6 +39,8 @@ const PokeInfos = ({ data }: Props) => {
       onClick: () => setShinyVisible(true)
     }
   ]
+
+  if (isLoading) return <LoadingPokeInfos />
 
   return (
     <Row gutter={[24, 24]} style={{ height: '100%' }}>
@@ -98,7 +101,7 @@ const PokeInfos = ({ data }: Props) => {
 
         {/* Details */}
         <Flex vertical>
-          <div>
+          <Flex vertical>
             <Typography.Text disabled>#{id}</Typography.Text>
             <Typography.Title
               level={1}
@@ -106,7 +109,7 @@ const PokeInfos = ({ data }: Props) => {
             >
               {name}
             </Typography.Title>
-          </div>
+          </Flex>
 
           <Flex style={{ marginTop: '8px' }}>
             {types.map(type => (
@@ -118,6 +121,41 @@ const PokeInfos = ({ data }: Props) => {
             {description}
           </Typography.Paragraph>
         </Flex>
+      </Col>
+    </Row>
+  )
+}
+
+const LoadingPokeInfos = () => {
+  return (
+    <Row gutter={[24, 24]} style={{ height: '100%' }}>
+      {/* Image */}
+      <Col xs={24} sm={12} lg={8}>
+        <Flex align="center" justify="center">
+          <Skeleton.Image style={{ width: 260, height: 260 }} />
+        </Flex>
+      </Col>
+
+      {/* Infos */}
+      <Col
+        xs={24}
+        sm={12}
+        lg={15}
+        style={{
+          gap: 32,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end'
+        }}
+      >
+        {/* Buttons */}
+        <Flex align="center" gap={8}>
+          <Skeleton.Button size="small" />
+          <Skeleton.Button size="small" />
+        </Flex>
+
+        {/* Details */}
+        <Skeleton />
       </Col>
     </Row>
   )

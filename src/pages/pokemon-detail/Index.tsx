@@ -1,5 +1,5 @@
-import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Button, Col, Flex, Row, theme } from 'antd'
+import { ArrowLeftOutlined, LoadingOutlined } from '@ant-design/icons'
+import { Button, Col, Flex, Row, Spin, theme } from 'antd'
 import { Content } from 'antd/es/layout/layout'
 import { Link, useParams } from 'react-router'
 import { useGetEvolutionChain } from '../../api/useEvolutionChain'
@@ -19,12 +19,30 @@ import { formatPokeStats } from './data/pokeStats'
 const PokemonDetail = () => {
   const params = useParams()
 
-  const { data: pokeData, isLoading } = useGetPokemon(Number(params.id))
-  const { data: speciesData } = useGetSpecies(Number(params.id))
-  const { data: typesData } = useGetTypes(pokeData?.types[0].type.name || '')
-  const { data: evolutionChainData } = useGetEvolutionChain(
-    speciesData?.evolution_chain.url || ''
-  )
+  const {
+    data: pokeData,
+    isFetching: pokeLoading,
+    isError: pokeError
+  } = useGetPokemon(Number(params.id))
+  const {
+    data: speciesData,
+    isFetching: speciesLoading,
+    isError: speciesError
+  } = useGetSpecies(Number(params.id))
+  const {
+    data: typesData,
+    isFetching: typesLoading,
+    isError: typesError
+  } = useGetTypes(pokeData?.types[0].type.name || '')
+  const {
+    data: evolutionChainData,
+    isFetching: evolutionChainLoading,
+    isError: evolutionChainError
+  } = useGetEvolutionChain(speciesData?.evolution_chain.url || '')
+
+  const isLoading =
+    pokeLoading || speciesLoading || typesLoading || evolutionChainLoading
+  const isError = pokeError || speciesError || typesError || evolutionChainError
 
   const {
     token: { colorBgContainer, colorSplit }
@@ -37,7 +55,14 @@ const PokemonDetail = () => {
     !typesData ||
     !evolutionChainData
   ) {
-    return <div>Loading...</div>
+    return (
+      <Flex align="center" justify="center" style={{ height: '100vh' }}>
+        <Spin
+          size="large"
+          indicator={<LoadingOutlined style={{ fontSize: 48 }} spin />}
+        />
+      </Flex>
+    )
   }
 
   const pokeInfos = formatPokeInfo(pokeData, speciesData)
@@ -67,19 +92,28 @@ const PokemonDetail = () => {
 
       <Row gutter={[0, 40]}>
         <Col xs={24} lg={12} style={{ borderRight: `1px solid ${colorSplit}` }}>
-          <PokeInfos data={pokeInfos} />
+          <PokeInfos
+            data={pokeInfos}
+            isLoading={pokeLoading || speciesLoading}
+          />
         </Col>
         <Col xs={24} lg={12}>
-          <PokeStats data={pokeStats} />
+          <PokeStats data={pokeStats} isLoading={pokeLoading} />
         </Col>
       </Row>
 
       <Row gutter={[0, 40]} style={{ marginTop: 80 }}>
         <Col xs={24} xl={12}>
-          <PokeEffectiveness data={pokeEffectiveness} />
+          <PokeEffectiveness
+            data={pokeEffectiveness}
+            isLoading={typesLoading}
+          />
         </Col>
         <Col xs={24} xl={12}>
-          <EvolutionChain data={evolutionChain} />
+          <EvolutionChain
+            data={evolutionChain}
+            isLoading={evolutionChainLoading}
+          />
         </Col>
       </Row>
     </Content>
