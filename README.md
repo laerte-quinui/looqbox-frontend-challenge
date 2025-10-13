@@ -1,52 +1,103 @@
-### Would you like to work with us? Apply [here](https://looqbox.gupy.io/)!
+<div align="center">
+  <h1>
+    Looqbox Frontend chalenge solution
+  </h1>
 
-# Looqbox FrontEnd Challenge
-![Looqbox](https://github.com/looqbox/looqbox-frontend-challenge/blob/master/logo.png)
+This is my solution for the proposed frontend chalenge.
 
-## Challenge
-In this challenge you will need to build a **S**ingle **P**age **A**pplication using ReactJS and a provided api
+</div>
 
-We will not use anything from your project other than evaluate your skills and you are free to use it in your portfolio
+</br>
 
-## Stack
-We use:
-- ReactJS
-- Redux
+<p align="center">
+  <img src="/public/logo.png" alt="Looqdex Logo" width="400" />
+</p>
+
+---
+
+## Table of contents
+
+- [Overview](#overview)
+  - [Screenshot](#screenshot)
+  - [Features](#features)
+  - [Run the project](#run-the-project)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [The journey](#the-journey)
+- [Author](#author)
+
+## Overview
+
+### Screenshot
+
+![Home page screenshot](/public/homepage-screenshot.png)
+![Details page screenshot](/public/detailpage-screenshot.png)
+
+## Features
+
+- List of Pokémon in the home page
+- Searchbar to search any Pokémon by name or ID
+- Pagination to display more Pokémon
+- Pokémon details page with:
+  - Animated sprite
+  - Description
+  - Pokémon cry
+  - Shiny sprite display
+  - Height and Weight
+  - Charts for base stats visualization
+  - Type effectiveness
+  - Evolution chain
+- Navigations between two routes (`/` - home page, `/pokemon/:id` - Pokémon details)
+- Error and loading handling
+- Responsive layout
+
+> See more running the project!
+
+## Run the project
+
+> Disclaimer: This project uses Vite for local hosting and building. Make sure you have Node.js version 22.12 or higher installed so it can work properly.
+
+- Clone the repository in your machine
+- Acces the dev branch running: `$ git checkout dev`
+- Install the dependencies with `$ npm install`
+- Run the project using `$ npm run dev`
+- Access the provided localhost url and voilà! Have fun!
+
+## My process
+
+### Built with
+
+- React
 - TypeScript
-- AntDesign
-
-## Submitting
-- Make a fork of this repository
-- Create your branch
-- ⚠️ Do a initial Commit when you start
-- ⚠️ Do a final commit when you finish
-- When you're done send us a pull request
-
-# Guidelines
-You need to create a Single Page Application (SPA) that displays a list of Pokémon and allows users to search for them, using the [Pokeapi](https://pokeapi.co/docs/v2). Your app must be dynamic, meaning you **must not** reload the page to show new content.
-
-The PokeAPI was chosen for its simplicity in making requests. Since it is an open API, please **be mindful of how many requests** you make.
-
-## Requirements:
-
-- On the main page, include a search bar and a preloaded list of Pokémon.
-- Clicking on any Pokémon should display a card, modal, or page with that Pokémon’s information.
-- Typing in the search bar and pressing Enter should display the search result instead of the list.
-- Your app must include at least two different routes (e.g., /home, /details — be creative!).
-- Add a README file to document your project.
-
-You may use any libraries or dependencies you like (e.g., Axios, Bootstrap, Material UI...).
-
-## Bonus points!
-- Pagination
-- Error handling
-- Documentation
-- Linting
-- Charts
-- Unit Testing
+- Vite
 - Ant Design
+- Recharts - for charts
+- Axios - for data fetching
+- Tanstack / React-query - for data management and chaching
+- React Router - for navigation
+- EsLint and Prettier - Linting
 
-## Useful links
-- [React docs](https://react.dev/)
-- [PokeApi docs](https://pokeapi.co/docs/v2)
-- [Redux](https://redux.js.org/)
+### The journey
+
+After reading the chalenge description, I opened Figma to start designing my ideas of pages, layouts and components, so I could get a better base when coding it out. You can check the Figma project [here](https://www.figma.com/design/A5wc90dBVFydtFRyzmhWDr/Looqdex-%7C-Looqbox-Frontend-Chalenge?node-id=106-41&t=pVm6iuhT96ga1ifB-1).
+
+After finishing the design, I started the project by cloning the repository in my machine and setting up Vite with React and Typescript and additional configurations for EsLint and Prettier linting.
+
+Then, I divided my process in simple steps. For each page, I would:
+
+- Create the page component
+- Create components related to the page
+- Mock data
+- Implement responsiviness
+- Fetch data from the PokéApi
+- Check for possible refactoring and code enhancement
+
+Following this steps, I was capable to finish the project in the estimated time and in a organized way.
+
+## Author
+
+This project was built with a lot of love (and coffee) by me, Laerte Quinui!
+
+- [GitHub](https://github.com/laerte-quinui)
+- [LinkedIn](https://www.linkedin.com/in/laerte-quinui/)
+- [E-mail](mailto:laertequinuio@gmail.com)
